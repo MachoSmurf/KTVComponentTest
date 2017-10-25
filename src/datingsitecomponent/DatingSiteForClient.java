@@ -6,6 +6,7 @@
 package datingsitecomponent;
   
 import webservice.DatingSiteWebServiceException_Exception;
+import webservice.Preference;
 
 /**
  *
@@ -41,6 +42,36 @@ public class DatingSiteForClient {
         webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
         webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
         return port.logout(arg0);
+    }
+
+    public java.util.List<webservice.Message> getMessagesReceived(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.getMessagesReceived(arg0);
+    }
+
+    public java.util.List<webservice.Message> getMessagesSent(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.getMessagesSent(arg0);
+    }
+
+    public boolean sendMessage(java.lang.String arg0, webservice.Profile arg1, java.lang.String arg2) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.sendMessage(arg0, arg1, arg2);
+    }
+
+    public java.util.List<webservice.Profile> requestMatchingProfiles(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.requestMatchingProfiles(arg0);
+    }
+
+    public Preference getPreference(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.getPreference(arg0);
     }
     
 }

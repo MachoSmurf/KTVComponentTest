@@ -5,9 +5,13 @@
  */
 package datingsitecomponent;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -23,6 +27,9 @@ import static org.junit.Assert.*;
 import webservice.DatingSiteWebServiceException;
 import webservice.DatingSiteWebServiceException_Exception;
 import webservice.Gender;
+import webservice.Message;
+import webservice.Preference;
+import webservice.Profile;
 
 /**
  *
@@ -61,18 +68,15 @@ public class DatingSiteForClientTest {
     public void testRegisterParticipant() throws DatingSiteWebServiceException_Exception{
         XMLGregorianCalendar date = null;
         boolean registerResult = false;
-        try {
-            //convert to XMLGregorianCalendar
-            date = DatatypeFactory.newInstance().newXMLGregorianCalendar();
-            date.setDay(10);
-            date.setMonth(10);
-            date.setYear(1980);
-        } catch (DatatypeConfigurationException ex) {
-            Logger.getLogger(DatingSiteForClientTest.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("failed to create date");
-        }
-        try{
-            registerResult = ds.registerParticipant("Testuser1", "Teststraat1", "1234AB", "Amsterdam", date, Gender.MALE, "NL12RABO012234566", "testadres@testsite.nl", "testpass");
+        
+        try{            
+            DateFormat format = new SimpleDateFormat("Y/M/d");
+            String dateStr = "1980/03/01";
+            Date d = format.parse(dateStr);
+            GregorianCalendar gregory = new GregorianCalendar();
+            gregory.setTime(d);
+            XMLGregorianCalendar calendarMale = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregory);
+            registerResult = ds.registerParticipant("Joost Kuijpers", "Hoofdstraat 73", "Groningen", "4183 KS", calendarMale, Gender.MALE, "NL 21 RABO 0123456789", "test@test.nl", "testpass");
         }
         catch (Exception e)
         {
@@ -81,8 +85,8 @@ public class DatingSiteForClientTest {
         }        
         
         Assert.assertEquals("Expected Registration", true, registerResult);
-    }
-    
+    }    
+       
     @Test
     public void testUnregisterParticipant() throws DatingSiteWebServiceException_Exception{
         Assert.assertEquals("Expected unvalid unregister response", false, ds.unregisterParticipant("0123456789"));
@@ -120,9 +124,45 @@ public class DatingSiteForClientTest {
         }
         catch(DatingSiteWebServiceException_Exception dswe){
             Assert.assertEquals("Expected to short error for session ID", "ERROR: wrong session id logout()", dswe.getMessage());
-        }
-        
+        }        
     }
     
+    @Test
+    public void testGetMessagesReceived() throws DatingSiteWebServiceException_Exception{
         
+        List<Message> responseList = new ArrayList<>();
+        responseList = ds.getMessagesReceived("0123456789");       
+        Assert.assertEquals("Expected null on invalid sessionID for getMessagesReceived", new ArrayList(), responseList);
+    }
+    
+    @Test
+    public void testGetMessagesSend() throws DatingSiteWebServiceException_Exception{
+        
+        List<Message> responseList = new ArrayList<>();
+        responseList = ds.getMessagesSent("0123456789");       
+        Assert.assertEquals("Expected null on invalid sessionID for getMessagesSend", new ArrayList(), responseList);
+    }
+    
+    @Test
+    public void testSendMessage() throws DatingSiteWebServiceException_Exception{
+        
+        Profile nonExisting1 = new Profile();        
+        boolean messageResult = ds.sendMessage("0123456789", nonExisting1, "Dit is een test");        
+        Assert.assertEquals("Expected false on wrong session ID for sendMessage", false, messageResult);
+    }
+    
+    @Test
+    public void testRequestMatchingProfiles() throws DatingSiteWebServiceException_Exception{
+        
+        List<Profile> responseList = new ArrayList<>();
+        responseList = ds.requestMatchingProfiles("0123456789");
+        Assert.assertEquals("Expected false on wrong session ID for requestMessageProfile", new ArrayList(), responseList);
+    }
+    
+    @Test 
+    public void testGetPreference() throws DatingSiteWebServiceException_Exception{
+        
+        Preference responsePreference = ds.getPreference("0123456789");
+        Assert.assertEquals("Expected false on wrong session ID for getPreference", null, responsePreference);
+    }
 }
