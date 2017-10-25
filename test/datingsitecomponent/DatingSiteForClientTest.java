@@ -60,6 +60,7 @@ public class DatingSiteForClientTest {
     @Test
     public void testRegisterParticipant() throws DatingSiteWebServiceException_Exception{
         XMLGregorianCalendar date = null;
+        boolean registerResult = false;
         try {
             //convert to XMLGregorianCalendar
             date = DatatypeFactory.newInstance().newXMLGregorianCalendar();
@@ -70,9 +71,33 @@ public class DatingSiteForClientTest {
             Logger.getLogger(DatingSiteForClientTest.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("failed to create date");
         }
-        boolean registerResult = ds.registerParticipant("Testuser1", "Teststraat1", "1234AB", "Amsterdam", date, Gender.MALE, "NL12RABO012234566", "testadres@testsite.nl", "testpass");
+        try{
+            registerResult = ds.registerParticipant("Testuser1", "Teststraat1", "1234AB", "Amsterdam", date, Gender.MALE, "NL12RABO012234566", "testadres@testsite.nl", "testpass");
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+            fail("Exception when registering:" + e);
+        }        
         
         Assert.assertEquals("Expected Registration", true, registerResult);
+    }
+    
+    @Test
+    public void testUnregisterParticipant() throws DatingSiteWebServiceException_Exception{
+        Assert.assertEquals("Expected unvalid unregister response", false, ds.unregisterParticipant("0123456789"));
+        try{
+            ds.unregisterParticipant("short");
+        }
+        catch(DatingSiteWebServiceException_Exception dswe){
+            Assert.assertEquals("Expected to short error for session ID", "ERROR: wrong length sessionId", dswe.getMessage());
+        }
+        try{
+            ds.unregisterParticipant("thissessionIDistolong");
+        }
+        catch(DatingSiteWebServiceException_Exception dswe){
+            Assert.assertEquals("Expected to short error for session ID", "ERROR: wrong length sessionId", dswe.getMessage());
+        }
     }
     
     @Test
@@ -80,4 +105,24 @@ public class DatingSiteForClientTest {
         Assert.assertEquals("Ongeldige login verwacht (Null)", null, ds.login("onbekend", "Verkeerdwachtwoord"));
     }
     
+    @Test
+    public void testLogout() throws DatingSiteWebServiceException_Exception
+    {
+        Assert.assertEquals("Expected unvalid unregister response", false, ds.logout("0123456789"));
+        try{
+            ds.logout("thissessionIDistolong");
+        }
+        catch(DatingSiteWebServiceException_Exception dswe){
+            Assert.assertEquals("Expected to short error for session ID", "ERROR: wrong session id logout()", dswe.getMessage());
+        }
+        try{
+            ds.logout("short");
+        }
+        catch(DatingSiteWebServiceException_Exception dswe){
+            Assert.assertEquals("Expected to short error for session ID", "ERROR: wrong session id logout()", dswe.getMessage());
+        }
+        
+    }
+    
+        
 }
