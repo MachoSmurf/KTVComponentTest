@@ -108,7 +108,7 @@ public class DatingSiteForClientTest {
     @Test
     public void testLogout() throws DatingSiteWebServiceException_Exception
     {
-        Assert.assertEquals("Expected unvalid unregister response", false, ds.logout("0123456789"));
+        Assert.assertEquals("Expected unvalid logout response", false, ds.logout("0123456789"));
         try{
             ds.logout("thissessionIDistolong");
         }
