@@ -34,6 +34,11 @@ import webservice.Profile;
 /**
  *
  * @author MS-Laptop
+ * 
+ * !!!NOTICE!!!
+ * 
+ * THIS FILE IS DEPRICATED, IS NOT SUPPORTED AND WILL BE REMOVED IN FUTURE VERSIONS! DO NOT USE FOR TESTING!!!
+ * 
  */
 public class DatingSiteForClientTest {
     

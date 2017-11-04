@@ -73,5 +73,11 @@ public class DatingSiteForClient {
         webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
         return port.getPreference(arg0);
     }
+
+    public Preference setPreference(java.lang.String arg0, webservice.Gender arg1, int arg2, int arg3, int arg4, int arg5, webservice.ColorHair arg6, webservice.ColorEyes arg7) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.setPreference(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    }
     
 }
