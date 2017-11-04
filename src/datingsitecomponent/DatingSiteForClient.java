@@ -7,6 +7,7 @@ package datingsitecomponent;
   
 import webservice.DatingSiteWebServiceException_Exception;
 import webservice.Preference;
+import webservice.Profile;
 
 /**
  *
@@ -78,6 +79,12 @@ public class DatingSiteForClient {
         webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
         webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
         return port.setPreference(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    }
+
+    public Profile setProfile(java.lang.String arg0, int arg1, webservice.ColorHair arg2, webservice.ColorEyes arg3, java.lang.String arg4, java.lang.String arg5) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.setProfile(arg0, arg1, arg2, arg3, arg4, arg5);
     }
     
 }

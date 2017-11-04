@@ -29,21 +29,8 @@ public class MatchingProfilesTest {
     }
     
     @BeforeClass
-    public void setUpClass() throws DatingSiteWebServiceException_Exception {
-        //Load up testDataset
-        int site = 30;
-        if (site == 30)
-        {
-            //load datingsite 30+ dataset
-            DataSet30 d30 = new DataSet30(ds);
-            d30.registerUsers();
-            d30.setUserProfiles();
-            d30.setUserPreference();
-        }
-        if (site == 50)
-        {
-            //load datingsite 50+ dataset
-        }
+    public static void setUpClass(){
+        
     }
     
     @AfterClass
@@ -51,11 +38,29 @@ public class MatchingProfilesTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws DatingSiteWebServiceException_Exception  {
+        //Load up testDataset
+        int site = 30;
+        if (site == 30)
+        {
+            //load datingsite 30+ dataset
+            DataSet30 d30 = new DataSet30(ds);
+            d30.registerUsers();
+        }
+        if (site == 50)
+        {
+            //load datingsite 50+ dataset
+        }
     }
     
     @After
     public void tearDown() {
+    }
+    
+    @Test
+    public void emptyTest()
+    {
+        System.out.println("Setup Complete");
     }
 
     // TODO add test methods here.
