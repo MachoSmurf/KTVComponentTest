@@ -40,7 +40,7 @@ public class MatchingProfilesTest {
     @Before
     public void setUp() throws DatingSiteWebServiceException_Exception  {
         //Load up testDataset
-        int site = 30;
+        int site = 50;
         if (site == 30)
         {
             //load datingsite 30+ dataset
@@ -50,6 +50,8 @@ public class MatchingProfilesTest {
         if (site == 50)
         {
             //load datingsite 50+ dataset
+            DataSet50 d50 = new DataSet50(ds);
+            d50.registerUsers();
         }
     }
     
