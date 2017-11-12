@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/DatingSite?wsdl" uri="xml-resources/web-service-references/DatingSite/wsdl/localhost_8080/DatingSite.wsdl"/>
     <system systemId="http://localhost:8080/DatingSite?xsd=1" uri="xml-resources/web-service-references/DatingSite/wsdl/localhost_8080/DatingSite.xsd_1.xsd"/>
+    <system systemId="http://localhost:8181/DatingSite/?wsdl" uri="xml-resources/web-service-references/WsClient/wsdl/localhost_8181/DatingSite/.wsdl"/>
+    <system systemId="http://localhost:8181/DatingSite?xsd=1" uri="xml-resources/web-service-references/WsClient/wsdl/localhost_8181/DatingSite.xsd_1.xsd"/>
 </catalog>

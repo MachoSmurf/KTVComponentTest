@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package datingsitecomponent;
-  
+
 import webservice.DatingSiteWebServiceException_Exception;
 import webservice.ParticipantInfo;
 import webservice.Preference;
@@ -14,36 +14,13 @@ import webservice.Profile;
  *
  * @author MS-Laptop
  */
-public class DatingSiteForClient implements IDatingSite{
+public class DatingSiteForClient2 implements IDatingSite{
 
+    @Override
     public String getDatingSiteName() throws DatingSiteWebServiceException_Exception {
         webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
         webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
         return port.getDatingSiteName();
-    } 
-
-    public boolean registerParticipant(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2, java.lang.String arg3, javax.xml.datatype.XMLGregorianCalendar arg4, webservice.Gender arg5, java.lang.String arg6, java.lang.String arg7, java.lang.String arg8) throws DatingSiteWebServiceException_Exception {
-        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
-        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
-        return port.registerParticipant(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-    }
-
-    public boolean unregisterParticipant(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
-        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
-        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
-        return port.unregisterParticipant(arg0);
-    }   
-
-    public String login(java.lang.String arg0, java.lang.String arg1) throws DatingSiteWebServiceException_Exception {
-        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
-        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
-        return port.login(arg0, arg1);
-    }
-
-    public boolean logout(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
-        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
-        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
-        return port.logout(arg0);
     }
 
     public java.util.List<webservice.Message> getMessagesReceived(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
@@ -58,10 +35,40 @@ public class DatingSiteForClient implements IDatingSite{
         return port.getMessagesSent(arg0);
     }
 
-    public boolean sendMessage(java.lang.String arg0, webservice.Profile arg1, java.lang.String arg2) throws DatingSiteWebServiceException_Exception {
+    public ParticipantInfo getParticipantInfo(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
         webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
         webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
-        return port.sendMessage(arg0, arg1, arg2);
+        return port.getParticipantInfo(arg0);
+    }
+
+    public Preference getPreference(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.getPreference(arg0);
+    }
+
+    public Profile getProfile(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.getProfile(arg0);
+    }
+
+    public String login(java.lang.String arg0, java.lang.String arg1) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.login(arg0, arg1);
+    }
+
+    public boolean logout(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.logout(arg0);
+    }
+
+    public boolean registerParticipant(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2, java.lang.String arg3, javax.xml.datatype.XMLGregorianCalendar arg4, webservice.Gender arg5, java.lang.String arg6, java.lang.String arg7, java.lang.String arg8) throws DatingSiteWebServiceException_Exception {
+        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
+        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
+        return port.registerParticipant(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
     }
 
     public java.util.List<webservice.Profile> requestMatchingProfiles(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
@@ -70,10 +77,10 @@ public class DatingSiteForClient implements IDatingSite{
         return port.requestMatchingProfiles(arg0);
     }
 
-    public Preference getPreference(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
+    public boolean sendMessage(java.lang.String arg0, webservice.Profile arg1, java.lang.String arg2) throws DatingSiteWebServiceException_Exception {
         webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
         webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
-        return port.getPreference(arg0);
+        return port.sendMessage(arg0, arg1, arg2);
     }
 
     public Preference setPreference(java.lang.String arg0, webservice.Gender arg1, int arg2, int arg3, int arg4, int arg5, webservice.ColorHair arg6, webservice.ColorEyes arg7) throws DatingSiteWebServiceException_Exception {
@@ -88,15 +95,10 @@ public class DatingSiteForClient implements IDatingSite{
         return port.setProfile(arg0, arg1, arg2, arg3, arg4, arg5);
     }
 
-    public ParticipantInfo getParticipantInfo(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
+    public boolean unregisterParticipant(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
         webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
         webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
-        return port.getParticipantInfo(arg0);
+        return port.unregisterParticipant(arg0);
     }
-
-    public Profile getProfile(java.lang.String arg0) throws DatingSiteWebServiceException_Exception {
-        webservice.DatingSiteForClientService service = new webservice.DatingSiteForClientService();
-        webservice.IDatingSiteForClient port = service.getDatingSiteForClientPort();
-        return port.getProfile(arg0);
-    }
+    
 }

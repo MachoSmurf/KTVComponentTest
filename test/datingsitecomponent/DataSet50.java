@@ -24,9 +24,9 @@ import webservice.Gender;
  */
 public class DataSet50 {
     
-    DatingSiteForClient ds;
+    IDatingSite ds;
     
-    public DataSet50(DatingSiteForClient ds){
+    public DataSet50(IDatingSite ds){
         this.ds = ds;
     }
     
