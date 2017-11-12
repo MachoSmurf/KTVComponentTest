@@ -151,6 +151,8 @@ public class DataSet50 {
         ds.setProfile(sesID, 175, ColorHair.BLOND, ColorEyes.BRUIN, "Breien", "Is graag thuis");
         ds.setPreference(sesID, Gender.MALE, 65, 69, 180, 200, ColorHair.GRIJS, ColorEyes.BRUIN);
         ds.logout(sesID); 
+        
+        System.out.println("Dataset 50+ added");
     }
         
     private XMLGregorianCalendar generateDate(String dateString){
