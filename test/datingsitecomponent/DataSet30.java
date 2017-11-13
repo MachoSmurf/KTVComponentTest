@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -18,6 +19,7 @@ import webservice.ColorHair;
 import webservice.DatingSiteWebServiceException_Exception;
 import webservice.Gender;
 
+
 /**
  *
  * @author MS-Laptop
@@ -25,6 +27,7 @@ import webservice.Gender;
 public class DataSet30 {
     
     IDatingSite ds;
+    
     
     public DataSet30(IDatingSite ds){
         this.ds = ds;

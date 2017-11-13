@@ -5,12 +5,17 @@
  */
 package datingsitecomponent;
 
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import webservice.DatingSiteWebServiceException_Exception;
+import webservice.Message;
+import webservice.Profile;
 
 /**
  *
@@ -20,7 +25,16 @@ import static org.junit.Assert.*;
  */
 public class MessageTest {
     
+    IDatingSite ds30;
+    IDatingSite ds50;
+    Profile sender;  
+    Profile receiver;  
+    
+    public static boolean dataSetInit;
+    
     public MessageTest() {
+        ds30 = new DatingSiteForClient();
+        ds50 = new DatingSiteForClient2();
     }
     
     @BeforeClass
@@ -32,16 +46,44 @@ public class MessageTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws DatingSiteWebServiceException_Exception {
+        if (!dataSetInit)
+        {
+            //load datingsite 30+ dataset
+            DataSet30 d30 = new DataSet30(ds30);
+            d30.registerUsers();
+
+            //load datingsite 50+ dataset
+            DataSet50 d50 = new DataSet50(ds50);
+            d50.registerUsers();      
+                        
+            dataSetInit = true;
+        }
     }
     
     @After
     public void tearDown() {
     }
+    
+    @Test
+    public void testCase10_1() throws DatingSiteWebServiceException_Exception
+    {
+        //// START TESTING USER 2 send message to user 12
+        String sesID2 = ds30.login("test2@30plusdatingtest.nl", "Dating302");
+        String sesID12 = ds30.login("test12@30plusdatingtest.nl", "Dating312");
+        String content = "This message is for user12";
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+        receiver = ds30.getProfile(sesID12);
+        
+        ds30.sendMessage(sesID2, receiver, content);
+        
+        List<Message> getMessagesSent = ds30.getMessagesSent(sesID2);
+        List<Message> getMessagesReceived = ds30.getMessagesReceived(sesID12);
+        
+        ds30.logout(sesID2);
+        ds30.logout(sesID12);
+        
+        Assert.assertEquals("Expected This message is for Test12", "This message is for Test12", getMessagesReceived.get(0).getContent());
+        Assert.assertEquals("Expected This message is for Test12", "This message is for Test12", getMessagesSent.get(0).getContent());
+    }  
 }
