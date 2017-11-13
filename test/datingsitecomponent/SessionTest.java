@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import webservice.Gender;
 
 /**
  *
@@ -19,6 +20,8 @@ import static org.junit.Assert.*;
  * This file should test the Login() and Logout() functionality of the interface
  */
 public class SessionTest {
+    
+    IDatingSite ds30 = new DatingSiteForClient();
     
     public SessionTest() {
     }
@@ -37,6 +40,11 @@ public class SessionTest {
     
     @After
     public void tearDown() {
+    }
+    
+    @Test
+    public void SessionTest(){
+                
     }
 
     // TODO add test methods here.

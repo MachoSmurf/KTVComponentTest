@@ -29,6 +29,7 @@ public class MatchingProfilesTest {
     
     IDatingSite ds30;
     IDatingSite ds50;
+    public static boolean dataSetInit;
     
     public MatchingProfilesTest() {
         ds30 = new DatingSiteForClient();
@@ -37,7 +38,6 @@ public class MatchingProfilesTest {
     
     @BeforeClass
     public static void setUpClass(){
-        
     }
     
     @AfterClass
@@ -47,14 +47,18 @@ public class MatchingProfilesTest {
     @Before
     public void setUp() throws DatingSiteWebServiceException_Exception  {
         //Load up testDataset
-        
-        //load datingsite 30+ dataset
-        DataSet30 d30 = new DataSet30(ds30);
-        d30.registerUsers();
-        
-        //load datingsite 50+ dataset
-        DataSet50 d50 = new DataSet50(ds50);
-        d50.registerUsers();
+        if (!dataSetInit)
+        {
+            //load datingsite 30+ dataset
+            DataSet30 d30 = new DataSet30(ds30);
+            d30.registerUsers();
+
+            //load datingsite 50+ dataset
+            DataSet50 d50 = new DataSet50(ds50);
+            d50.registerUsers();      
+                        
+            dataSetInit = true;
+        }
     }
     
     @After
@@ -140,10 +144,31 @@ public class MatchingProfilesTest {
         Assert.assertEquals("Expected Test32", "Shopt graag", matchingProfilesUser22.get(0).getDescription());
         System.out.println("Found matching user for Test22: Found Test32!");
     }
+    
+    
+    @Test
+    public void testCase9_6() throws DatingSiteWebServiceException_Exception{
+        ////START TESTING USER 8//////
+        String sesID = ds30.login("test8@30plusdatingtest.nl", "Dating308");
+        List<Profile> matchingProfilesUser8 = ds50.requestMatchingProfiles(sesID);
+        ds50.logout(sesID);
+        
+        //ds.setProfile(sesID, 155, ColorHair.ROOD, ColorEyes.BLAUW, "Shoppen", "Shopt graag"); 
+        if (!matchingProfilesUser8.isEmpty()){
+            fail("Expected zero matches for user 8");
+        }
+        System.out.println("No matching users found for user test8");
+        
+        ////START TESTING USER 28//////
+        sesID = ds50.login("test28@50plusdatingtest.nl", "Dating528");
+        List<Profile> matchingProfilesUser28 = ds50.requestMatchingProfiles(sesID);
+        ds50.logout(sesID);
+        
+        //ds.setProfile(sesID, 155, ColorHair.ROOD, ColorEyes.BLAUW, "Shoppen", "Shopt graag");
+        if (!matchingProfilesUser28.isEmpty()){
+            fail("Expected zero matches for user 28");
+        }        
+        System.out.println("No matching users found for user test28");
+    }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }
