@@ -65,11 +65,9 @@ public class MatchingProfilesTest {
     public void tearDown() {
     }
         
+    //These tests can cover the the general idea behind test 9.1, 9.2, 9.3, 9.4 and 9.5. Simply because accesing the data in this stage is enough to prove acces to a profile.
     @Test
-    public void testCase9_1() throws DatingSiteWebServiceException_Exception{
-        
-        //This test can cover the the general idea behind test 9.1, 9.2, 9.3, 9.4 and 9.5. Simply because accesing the data in this stage is enough to prove acces to a profile.
-        
+    public void user2MatchTest() throws DatingSiteWebServiceException_Exception{
         ////START TESTING USER 2//////
         String sesID = ds30.login("test2@30plusdatingtest.nl", "Dating302");
         List<Profile> matchingProfilesUser2 = ds30.requestMatchingProfiles(sesID);
@@ -82,12 +80,12 @@ public class MatchingProfilesTest {
         Assert.assertEquals("Expected Test12", "Shoppen", matchingProfilesUser2.get(0).getHobbies());
         Assert.assertEquals("Expected Test12", "Shopt graag", matchingProfilesUser2.get(0).getDescription());
         System.out.println("Found matching user for Test2: Found Test12!");
-        
-        
-        
-        
+    }
+    
+    @Test
+    public void user10MatchTest() throws DatingSiteWebServiceException_Exception{
         ////START TESTING USER 10//////
-        sesID = ds30.login("test10@30plusdatingtest.nl", "Dating310");
+        String sesID = ds30.login("test10@30plusdatingtest.nl", "Dating310");
         List<Profile> matchingProfilesUser10 = ds30.requestMatchingProfiles(sesID);
         ds30.logout(sesID);        
         
@@ -106,11 +104,12 @@ public class MatchingProfilesTest {
         Assert.assertEquals("Expected Test36", "Lezen", matchingProfilesUser10.get(1).getHobbies());
         Assert.assertEquals("Expected Test36", "Leest graag boeken", matchingProfilesUser10.get(1).getDescription());
         System.out.println("Found matching user for Test10: Found Test36!");
-        
-        
-        
+    }
+    
+    @Test
+    public void user20MatchTest() throws DatingSiteWebServiceException_Exception{
         ////START TESTING USER 20//////
-        sesID = ds30.login("test20@30plusdatingtest.nl", "Dating320");
+        String sesID = ds30.login("test20@30plusdatingtest.nl", "Dating320");
         List<Profile> matchingProfilesUser20 = ds30.requestMatchingProfiles(sesID);
         ds30.logout(sesID);
         
@@ -129,10 +128,12 @@ public class MatchingProfilesTest {
         Assert.assertEquals("Expected Test10", "Golf", matchingProfilesUser20.get(0).getHobbies());
         Assert.assertEquals("Expected Test10", "Graag buiten", matchingProfilesUser20.get(0).getDescription());
         System.out.println("Found matching user for Test20: Found Test26!");
-        
-        
+    }
+    
+    @Test
+    public void user22MatchTest() throws DatingSiteWebServiceException_Exception{
         ////START TESTING USER 22//////
-        sesID = ds50.login("test22@50plusdatingtest.nl", "Dating522");
+        String sesID = ds50.login("test22@50plusdatingtest.nl", "Dating522");
         List<Profile> matchingProfilesUser22 = ds50.requestMatchingProfiles(sesID);
         ds50.logout(sesID);
         
