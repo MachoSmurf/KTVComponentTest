@@ -64,6 +64,10 @@ public class SessionTest {
         boolean logoutResult = ds30.logout(sesID);
         Assert.assertEquals("Expected true on logout attempt", true, logoutResult);
         
+        //Test registering the same user
+        registerResult = ds30.registerParticipant("TestUser1", "TestStreetx", "TestCityx", "1234AX", generateDate("1980/01/02"), Gender.FEMALE, "123456789", "test001@plusdatingtestnl", "dating001");
+        Assert.assertEquals("Expected false on double registration attempt", false, registerResult);
+        
         sesID = ds30.login("test001@plusdatingtestnl", "dating001");
         boolean unregisterResult = ds30.unregisterParticipant(sesID);
         Assert.assertEquals("Expected true on unregister attempt", true, unregisterResult);
