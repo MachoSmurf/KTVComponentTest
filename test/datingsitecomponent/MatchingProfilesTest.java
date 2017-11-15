@@ -112,22 +112,23 @@ public class MatchingProfilesTest {
         String sesID = ds30.login("test20@30plusdatingtest.nl", "Dating320");
         List<Profile> matchingProfilesUser20 = ds30.requestMatchingProfiles(sesID);
         ds30.logout(sesID);
+        System.out.println("Matches voor user20: " + matchingProfilesUser20.size() + "/2");
         
         //ds.setProfile(sesID, 180, ColorHair.GRIJS, ColorEyes.BRUIN, "Vissen", "Visser");        
-        Assert.assertEquals("Expected Test26", 180, matchingProfilesUser20.get(1).getLength());
-        Assert.assertEquals("Expected Test26", ColorHair.GRIJS, matchingProfilesUser20.get(1).getColorHair());
-        Assert.assertEquals("Expected Test26", ColorEyes.BRUIN, matchingProfilesUser20.get(1).getColorEyes());
-        Assert.assertEquals("Expected Test26", "Vissen", matchingProfilesUser20.get(1).getHobbies());
-        Assert.assertEquals("Expected Test26", "Visser", matchingProfilesUser20.get(1).getDescription());
+        Assert.assertEquals("Expected Test26", 180, matchingProfilesUser20.get(0).getLength());
+        Assert.assertEquals("Expected Test26", ColorHair.GRIJS, matchingProfilesUser20.get(0).getColorHair());
+        Assert.assertEquals("Expected Test26", ColorEyes.BRUIN, matchingProfilesUser20.get(0).getColorEyes());
+        Assert.assertEquals("Expected Test26", "Vissen", matchingProfilesUser20.get(0).getHobbies());
+        Assert.assertEquals("Expected Test26", "Visser", matchingProfilesUser20.get(0).getDescription());
         System.out.println("Found matching user for Test20: Found Test26!");
         
         //ds.setProfile(sesID, 200, ColorHair.GRIJS, ColorEyes.BRUIN, "Golf", "Graag buiten");
-        Assert.assertEquals("Expected Test10", 200, matchingProfilesUser20.get(0).getLength());
-        Assert.assertEquals("Expected Test10", ColorHair.GRIJS, matchingProfilesUser20.get(0).getColorHair());
-        Assert.assertEquals("Expected Test10", ColorEyes.BRUIN, matchingProfilesUser20.get(0).getColorEyes());
-        Assert.assertEquals("Expected Test10", "Golf", matchingProfilesUser20.get(0).getHobbies());
-        Assert.assertEquals("Expected Test10", "Graag buiten", matchingProfilesUser20.get(0).getDescription());
-        System.out.println("Found matching user for Test20: Found Test26!");
+        Assert.assertEquals("Expected Test10", 200, matchingProfilesUser20.get(1).getLength());
+        Assert.assertEquals("Expected Test10", ColorHair.GRIJS, matchingProfilesUser20.get(1).getColorHair());
+        Assert.assertEquals("Expected Test10", ColorEyes.BRUIN, matchingProfilesUser20.get(1).getColorEyes());
+        Assert.assertEquals("Expected Test10", "Golf", matchingProfilesUser20.get(1).getHobbies());
+        Assert.assertEquals("Expected Test10", "Graag buiten", matchingProfilesUser20.get(1).getDescription());
+        System.out.println("Found matching user for Test20: Found Test10!");
     }
     
     @Test
